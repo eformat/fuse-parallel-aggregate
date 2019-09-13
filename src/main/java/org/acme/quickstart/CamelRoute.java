@@ -32,6 +32,7 @@ public class CamelRoute extends RouteBuilder {
                   System.out.println(Thread.currentThread() + " - STARTING" + exchange1.getIn().getBody());                  
                   if (exchange1.getIn().getBody(Integer.class) == 2) {
                       //System.out.println(Thread.currentThread() + " - Headers: " + exchange1.getIn().getHeaders());
+                      System.out.println(Thread.currentThread() + " # Of InFlight Exchanges: " + exchange1.getContext().getInflightRepository().size());
                       if (exchange1.getIn().getHeader("CamelRedelivered", Boolean.class) == Boolean.TRUE) {
                           return;
                       }
