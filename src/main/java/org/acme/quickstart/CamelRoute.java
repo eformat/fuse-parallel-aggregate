@@ -38,7 +38,7 @@ public class CamelRoute extends RouteBuilder {
                       throw new RuntimeException("Error body 2");
                   }
                   Thread.sleep((long) (Math.random() * 8000));
-                  System.out.println(Thread.currentThread() + " - ENDING" + exchange1.getIn().getBody() + ;
+                  System.out.println(Thread.currentThread() + " - ENDING" + exchange1.getIn().getBody());
               })
               .end()
               .to("log:out");
