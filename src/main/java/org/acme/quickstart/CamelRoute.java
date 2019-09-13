@@ -18,7 +18,7 @@ public class CamelRoute extends RouteBuilder {
       errorHandler(defaultErrorHandler().redeliveryDelay(3000).maximumRedeliveries(1));
 
       ThreadPoolBuilder builder = new ThreadPoolBuilder(getContext());
-      ExecutorService pool = builder.poolSize(10).maxPoolSize(30).keepAliveTime(Long.valueOf("5"), TimeUnit.MINUTES)
+      ExecutorService pool = builder.poolSize(40).maxPoolSize(80).keepAliveTime(Long.valueOf("5"), TimeUnit.MINUTES)
           .rejectedPolicy(ThreadPoolRejectedPolicy.CallerRuns).build("xxx");
   
       from("timer://trigger?period=200").
@@ -38,7 +38,7 @@ public class CamelRoute extends RouteBuilder {
                       }
                       throw new RuntimeException("Error body 2");
                   }
-                  Thread.sleep((long) (Math.random() * 8000));
+                  Thread.sleep((long) (Math.random() * 5000));
                   System.out.println(Thread.currentThread() + " - ENDING" + exchange1.getIn().getBody());
               })
               .end()
