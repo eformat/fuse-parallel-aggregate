@@ -1,20 +1,14 @@
 package org.acme.quickstart;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.Matchers.containsString;
-
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.net.URI;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import io.quarkus.test.junit.QuarkusTest;
-import io.restassured.RestAssured;
 
 @QuarkusTest
 public class CamelRouteTest {
@@ -35,7 +29,7 @@ public class CamelRouteTest {
                 if (line == null) {
                     /* More lines may appear later */
                     Thread.sleep(100);
-                } else if (line.contains(CamelRoute.MESSAGE)) {
+                } else if (line.contains("foo")) {
                     /* test passed */
                     return;
                 }
@@ -43,6 +37,6 @@ public class CamelRouteTest {
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         }
-        Assertions.fail(String.format("Log file [%s] should contain [%s] within [%d] ms.", logPath, CamelRoute.MESSAGE, timeoutMs));
+        Assertions.fail(String.format("Log file [%s] should contain [%s] within [%d] ms.", logPath, "foo", timeoutMs));
     }
 }
